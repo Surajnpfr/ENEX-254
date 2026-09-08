@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EM — Exam Command Center | ENEX 254</title>
+  <meta name="description" content="4-day Electromagnetics exam preparation — prioritize, practice, revise."/>
+  <meta name="theme-color" content="#091225"/>
+  <link rel="stylesheet" href="./css/app.css?v=8"/>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <a class="sr-only" href="#view">Skip to content</a>
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar" aria-label="Primary">
+      <div class="sidebar-brand">
+        <div class="code">ENEX 254</div>
+        <h1>EM Command Center</h1>
+        <p>4 days · maximize marks/hour</p>
+      </div>
+      <nav class="side-nav">
+        <div class="nav-group">Overview</div>
+        <button type="button" class="nav-btn active" data-route="#/dashboard"><span class="ico" aria-hidden="true">◉</span>Dashboard</button>
+        <button type="button" class="nav-btn" data-route="#/coverage"><span class="ico" aria-hidden="true">▤</span>Coverage</button>
+
+        <div class="nav-group">Study</div>
+        <button type="button" class="nav-btn" data-route="#/plan"><span class="ico" aria-hidden="true">☰</span>4-Day Plan</button>
+        <button type="button" class="nav-btn" data-route="#/topics"><span class="ico" aria-hidden="true">▣</span>Topics</button>
+        <button type="button" class="nav-btn" data-route="#/questions"><span class="ico" aria-hidden="true">?</span>Questions</button>
+        <button type="button" class="nav-btn" data-route="#/mcq"><span class="ico" aria-hidden="true">◎</span>MCQs</button>
+
+        <div class="nav-group">Review</div>
+        <button type="button" class="nav-btn" data-route="#/mistakes"><span class="ico" aria-hidden="true">⚠</span>Mistakes</button>
+        <button type="button" class="nav-btn" data-route="#/revision"><span class="ico" aria-hidden="true">↻</span>Revision</button>
+
+        <div class="nav-group">Exam</div>
+        <button type="button" class="nav-btn" data-route="#/mock"><span class="ico" aria-hidden="true">▣</span>Final Mock</button>
+        <button type="button" class="nav-btn" data-route="#/progress"><span class="ico" aria-hidden="true">▤</span>Progress</button>
+        <button type="button" class="nav-btn" data-route="#/settings"><span class="ico" aria-hidden="true">⚙</span>Settings</button>
+      </nav>
+      <div class="sidebar-foot" id="sidebar-ready">Coverage —</div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button type="button" id="btn-menu" class="btn btn-secondary menu-btn btn-icon" aria-label="Open menu">☰</button>
+        <div class="countdown" id="chrome-countdown"><strong>4</strong> DAYS LEFT</div>
+        <span id="chrome-day" class="day-chip">Day 1/4</span>
+        <span class="spacer"></span>
+        <button type="button" id="btn-search" class="btn btn-secondary btn-sm" title="Search (/)">Search <kbd style="opacity:.6">/</kbd></button>
+      </header>
+      <main id="view" class="content" tabindex="-1">
+        <div class="stack">
+          <div class="skeleton" style="height:28px;width:40%"></div>
+          <div class="skeleton" style="height:160px"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Mobile">
+    <button type="button" data-route="#/dashboard" class="active"><span class="ico">◉</span>Home</button>
+    <button type="button" data-route="#/coverage"><span class="ico">▤</span>Cover</button>
+    <button type="button" data-route="#/questions"><span class="ico">?</span>Q</button>
+    <button type="button" data-route="#/mistakes"><span class="ico">⚠</span>Fix</button>
+    <button type="button" data-route="#/mock"><span class="ico">▶</span>Mock</button>
+  </nav>
+
+  <div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-panel">
+      <input id="search-input" type="search" placeholder="Search syllabus, topics, questions…" autocomplete="off" aria-label="Search"/>
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </div>
+
+  <div id="toast-host" class="toast-host" aria-live="polite"></div>
+
+  <script type="module" src="./js/app.js?v=8"></script>
+</body>
+</html>

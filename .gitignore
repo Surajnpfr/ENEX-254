@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+*.swp
+*~
+.vscode/
+.idea/
+
+# Python (build_content.py)
+__pycache__/
+*.py[cod]
+.Python
+.venv/
+venv/
+
+# Local progress exports / backups (keep out of git)
+*.progress.json
+em-exam-progress-*.json
+*-migrated.json
+
+# Optional local overrides
+.env
+.env.*
+!.env.example
