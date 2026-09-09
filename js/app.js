@@ -243,6 +243,7 @@ function parseHash() {
     if (parts[1] === 'remaining') return { name: 'coverage', params: { view: 'remaining', ...params } };
     return { name: 'coverage', params };
   }
+  if (name === 'formulas') return { name: 'formulas', params };
   if (name === 'questions' && (params.mode === 'chapters' || parts[1] === 'chapters')) {
     return { name: 'chapterList', params };
   }
@@ -274,7 +275,7 @@ async function boot() {
   }
 
   try {
-    const res = await fetch('./data/content.json');
+    const res = await fetch('./data/content.json?v=14');
     if (!res.ok) throw new Error(`Failed to load content.json (${res.status})`);
     app.content = await res.json();
   } catch (e) {
@@ -399,6 +400,7 @@ async function render() {
     plan: viewPlan,
     planSession: viewPlanSession,
     revision: viewRevision,
+    formulas: viewFormulas,
     mock: viewMock,
     progress: viewProgress,
     settings: viewSettings,
@@ -789,6 +791,14 @@ function handleAction(action, el) {
     case 'import':
       $('#import-file')?.click();
       break;
+    case 'download-formulas-pdf':
+      downloadFormulasPdf(el?.dataset?.chapter || app.route.params.ch || 'all');
+      break;
+    case 'scroll-to': {
+      const target = document.getElementById(el?.dataset?.target || '');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      break;
+    }
     case 'reset-progress':
       openResetProgressDialog();
       break;
@@ -2993,6 +3003,440 @@ function submitMock() {
   render();
 }
 
+function getFormulaChapters(filterChapterId = 'all') {
+  const chapters = [...(app.content.chapters || [])].sort((a, b) => (a.number || 0) - (b.number || 0));
+  return chapters
+    .filter((ch) => filterChapterId === 'all' || ch.id === filterChapterId)
+    .map((ch) => {
+      const topics = app.content.topics
+        .filter((t) => {
+          if (t.chapterId !== ch.id) return false;
+          const hasEq = Array.isArray(t.formulas) && t.formulas.length;
+          const hasTables = Array.isArray(t.formulaTables) && t.formulaTables.length;
+          return hasEq || hasTables;
+        })
+        .sort((a, b) => {
+          // Reference sheets first within a chapter
+          if (!!b.isReference !== !!a.isReference) return a.isReference ? -1 : 1;
+          return String(a.title).localeCompare(String(b.title));
+        });
+      const formulaCount = topics.reduce(
+        (s, t) => s + (t.formulas?.length || 0) + (t.formulaTables?.length || 0),
+        0
+      );
+      return { chapter: ch, topics, formulaCount };
+    })
+    .filter((block) => block.formulaCount > 0);
+}
+
+function renderFormulaSheetHtml(blocks, { forPrint = false, showScreenChrome = true } = {}) {
+  const totalFormulas = blocks.reduce((s, b) => s + b.formulaCount, 0);
+  const totalTopics = blocks.reduce((s, b) => s + b.topics.length, 0);
+  const dateStr = new Date().toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
+  const body = blocks
+    .map(({ chapter, topics, formulaCount }) => {
+      const topicBlocks = topics
+        .map((t, ti) => {
+          const topicAnchor = `formula-topic-${escapeHtml(t.id)}`;
+          const formulas = (t.formulas || [])
+            .map((f, fi) =>
+              forPrint
+                ? `<tr class="eq-row">
+                    <td class="eq-num">${chapter.number}.${ti + 1}.${fi + 1}</td>
+                    <td class="eq-body md-body">$$${f}$$</td>
+                  </tr>`
+                : `<div class="formula-sheet-item">
+                    <div class="formula-sheet-eq md-body">$$${f}$$</div>
+                    <div class="formula-sheet-num">${ti + 1}.${fi + 1}</div>
+                  </div>`
+            )
+            .join('');
+          const tables = (t.formulaTables || [])
+            .map(
+              (tb) => `<div class="formula-table-block" id="formula-table-${escapeHtml(t.id)}-${escapeHtml(tb.id || tb.code || 't')}">
+              <h4 class="formula-table-title">${escapeHtml(tb.title)}</h4>
+              <div class="md-body formula-table-md">${renderMarkdown(tb.markdown || '')}</div>
+            </div>`
+            )
+            .join('');
+          const tablesBlock = tables
+            ? `<div class="formula-tables-wrap"><p class="formula-tables-label">Reference tables</p>${tables}</div>`
+            : '';
+          const eqBlock = forPrint
+            ? formulas
+              ? `<table class="eq-table"><tbody>${formulas}</tbody></table>`
+              : ''
+            : formulas
+              ? `<div class="formula-topic-list">${formulas}</div>`
+              : '';
+          return `<section class="formula-topic" id="${topicAnchor}">
+            <h3 class="formula-topic-title">${escapeHtml(t.title)}${
+              !forPrint && t.isReference ? ' <span class="badge badge-muted">Reference</span>' : ''
+            }</h3>
+            ${tablesBlock}
+            ${eqBlock}
+          </section>`;
+        })
+        .join('');
+      return `<section class="formula-chapter" id="formula-ch-${escapeHtml(chapter.id)}">
+        <header class="formula-chapter-head">
+          <div>
+            <p class="kicker">Chapter ${chapter.number}</p>
+            <h2>${escapeHtml(chapter.title)}</h2>
+          </div>
+          ${showScreenChrome ? `<div class="meta">${topics.length} topics · ${formulaCount} items</div>` : ''}
+        </header>
+        ${topicBlocks}
+      </section>`;
+    })
+    .join('');
+
+  const tocHtml = `<nav class="formula-toc-full">
+    <h2 class="formula-toc-heading">Table of Contents</h2>
+    <p class="formula-toc-note muted">${blocks.length} chapter${blocks.length === 1 ? '' : 's'} · ${totalTopics} topics · ${totalFormulas} items</p>
+    <ol class="formula-toc-chapters">
+      ${blocks
+        .map(
+          ({ chapter, topics, formulaCount }) => `<li>
+          <button type="button" class="formula-toc-ch" data-action="scroll-to" data-target="formula-ch-${escapeHtml(
+            chapter.id
+          )}"><strong>Ch.${chapter.number}</strong> ${escapeHtml(chapter.title)}
+          <span class="meta">${topics.length} · ${formulaCount}</span></button>
+          <ol class="formula-toc-topics">
+            ${topics
+              .map(
+                (t) => `<li><button type="button" class="formula-toc-topic" data-action="scroll-to" data-target="formula-topic-${escapeHtml(
+                  t.id
+                )}">${escapeHtml(t.title)}${
+                  (t.formulaTables || []).some((x) => /differential/i.test(x.title || ''))
+                    ? ' · differential elements'
+                    : ''
+                }</button></li>`
+              )
+              .join('')}
+          </ol>
+        </li>`
+        )
+        .join('')}
+    </ol>
+  </nav>`;
+
+  const tocPrint = `<nav class="formula-toc-print">
+    <h2>Contents</h2>
+    <ol class="toc-ch">
+      ${blocks
+        .map(
+          ({ chapter, topics }) => `<li>
+            <span class="toc-ch-title">${chapter.number}. ${escapeHtml(chapter.title)}</span>
+            <ol class="toc-topic">${topics
+              .map((t, i) => `<li>${chapter.number}.${i + 1} ${escapeHtml(t.title)}</li>`)
+              .join('')}</ol>
+          </li>`
+        )
+        .join('')}
+    </ol>
+  </nav>`;
+
+  if (forPrint) {
+    const printCss = formulaPdfStyles();
+    const printInner = `
+  <header class="sheet-cover">
+    <div class="code">ENEX 254 · Electromagnetics</div>
+    <h1>Formula Sheet</h1>
+    <div class="meta">${escapeHtml(dateStr)} · ${blocks.length} chapters · ${totalTopics} topics · ${totalFormulas} items</div>
+  </header>
+  ${tocPrint}
+  ${body}
+  <footer class="sheet-foot">
+    <span>EM Exam Prep — formulas only</span>
+    <span>${escapeHtml(dateStr)}</span>
+  </footer>`;
+    return { css: printCss, html: printInner, meta: { dateStr, totalTopics, totalFormulas } };
+  }
+
+  return `${tocHtml}${body}`;
+}
+
+function formulaPdfStyles() {
+  return `
+    * { box-sizing: border-box; }
+    .formula-pdf-sheet {
+      font-family: "Times New Roman", Times, "Liberation Serif", serif;
+      color: #222;
+      line-height: 1.35;
+      margin: 0;
+      padding: 8px 12px;
+      font-size: 10.5pt;
+      font-weight: 400;
+      font-synthesis: none;
+      background: #fff;
+      width: 794px;
+    }
+    h1, h2, h3, h4, strong, b, th { font-weight: 600; }
+    .sheet-cover {
+      border-bottom: 1.5px solid #333;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    .sheet-cover .code { font-size: 9pt; letter-spacing: .04em; text-transform: uppercase; font-weight: 400; color: #444; }
+    .sheet-cover h1 { margin: 2px 0 4px; font-size: 17pt; font-weight: 600; }
+    .sheet-cover .meta { font-size: 9.5pt; font-weight: 400; color: #444; }
+    .formula-toc-print { margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
+    .formula-toc-print h2 {
+      margin: 0 0 8px;
+      font-size: 12pt;
+      font-weight: 600;
+      border-bottom: 1px solid #333;
+      padding-bottom: 3px;
+    }
+    .toc-ch { margin: 0; padding-left: 18px; }
+    .toc-ch > li { margin: 6px 0; font-weight: 400; }
+    .toc-ch-title { font-weight: 600; font-size: 11pt; }
+    .toc-topic { margin: 2px 0 0; padding-left: 16px; font-size: 9.5pt; font-weight: 400; }
+    .toc-topic li { margin: 1px 0; }
+    .formula-chapter { margin: 18px 0 10px; page-break-before: always; }
+    .formula-chapter:first-of-type { page-break-before: auto; margin-top: 0; }
+    .formula-chapter-head {
+      border-bottom: 1px solid #333;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+    .formula-chapter-head .kicker {
+      margin: 0;
+      font-size: 8.5pt;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #444;
+    }
+    .formula-chapter-head h2 { margin: 1px 0 0; font-size: 12.5pt; font-weight: 600; }
+    .formula-topic { margin: 0 0 10px; }
+    .formula-topic-title {
+      margin: 8px 0 4px;
+      font-size: 10.5pt;
+      font-weight: 600;
+      border-bottom: 0.5px solid #bbb;
+      padding-bottom: 2px;
+    }
+    .formula-tables-label { display: none; }
+    .formula-table-title {
+      margin: 8px 0 3px;
+      font-size: 10pt;
+      font-weight: 600;
+      font-style: italic;
+    }
+    .formula-table-md table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+      font-weight: 400;
+      margin: 4px 0 8px;
+      page-break-inside: avoid;
+    }
+    .formula-table-md th,
+    .formula-table-md td {
+      border: 1px solid #666;
+      padding: 4px 5px;
+      vertical-align: top;
+      text-align: left;
+      font-weight: 400;
+    }
+    .formula-table-md th { background: #f3f3f3; font-weight: 600; }
+    .eq-table { width: 100%; border-collapse: collapse; margin: 0 0 6px; }
+    .eq-row { page-break-inside: avoid; }
+    .eq-num {
+      width: 3.2em;
+      vertical-align: top;
+      padding: 3px 6px 3px 0;
+      font-size: 8.5pt;
+      color: #555;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    .eq-body {
+      vertical-align: middle;
+      padding: 2px 0 4px;
+      text-align: center;
+      font-weight: 400;
+    }
+    mjx-container, .mjx-svg, .MathJax { font-weight: 400 !important; }
+    mjx-container svg { opacity: 0.92; }
+    footer.sheet-foot {
+      margin-top: 16px;
+      padding-top: 6px;
+      border-top: 1px solid #333;
+      font-size: 8.5pt;
+      font-weight: 400;
+      color: #555;
+      display: flex;
+      justify-content: space-between;
+    }
+    .badge, button, .meta { } /* keep meta visible in chapter heads if present */
+    .badge, button { display: none !important; }
+  `;
+}
+
+function loadHtml2Pdf() {
+  if (window.html2pdf) return Promise.resolve(window.html2pdf);
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js';
+    s.async = true;
+    s.onload = () => resolve(window.html2pdf);
+    s.onerror = () => reject(new Error('Failed to load PDF library'));
+    document.head.appendChild(s);
+  });
+}
+
+function viewFormulas() {
+  const chFilter = app.route.params.ch || 'all';
+  const blocks = getFormulaChapters(chFilter);
+  const allBlocks = getFormulaChapters('all');
+  const totalFormulas = allBlocks.reduce((s, b) => s + b.formulaCount, 0);
+  const filteredOnly = chFilter !== 'all';
+
+  const chips = [
+    `<button class="btn btn-sm ${chFilter === 'all' ? 'btn-primary' : 'btn-secondary'}" data-nav="#/formulas">All</button>`,
+    ...(app.content.chapters || [])
+      .slice()
+      .sort((a, b) => (a.number || 0) - (b.number || 0))
+      .map(
+        (ch) =>
+          `<button class="btn btn-sm ${chFilter === ch.id ? 'btn-primary' : 'btn-secondary'}" data-nav="#/formulas?ch=${encodeURIComponent(
+            ch.id
+          )}">Ch.${ch.number}</button>`
+      ),
+  ].join('');
+
+  return `
+  <div class="stack formulas-page">
+    <div class="row" style="justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap">
+      <div>
+        <p class="kicker">Rapid revision</p>
+        <h1 class="h1">Formula sheet</h1>
+        <p class="muted" style="margin:0">Chapter-wise · formulas + reference tables · ${totalFormulas} items · ${allBlocks.length} chapters</p>
+      </div>
+      <div class="row" style="flex-wrap:wrap;gap:8px">
+        <button class="btn btn-primary" data-action="download-formulas-pdf" data-chapter="all">Download full PDF</button>
+        ${
+          filteredOnly
+            ? `<button class="btn btn-secondary" data-action="download-formulas-pdf" data-chapter="${escapeHtml(
+                chFilter
+              )}">PDF this chapter only</button>`
+            : ''
+        }
+      </div>
+    </div>
+
+    <div class="row" style="flex-wrap:wrap;gap:8px">${chips}</div>
+
+    ${
+      filteredOnly
+        ? `<div class="panel panel-warn"><p class="muted" style="margin:0">TOC below shows <strong>Chapter ${escapeHtml(
+            String(blocks[0]?.chapter?.number || '')
+          )} only</strong>. Switch to <button class="btn btn-sm btn-secondary" data-nav="#/formulas">All</button> for Chapters 1–6, or use <strong>Download full PDF</strong>.</p></div>`
+        : ''
+    }
+
+    <div class="panel">
+      <div class="row" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <p class="kicker">Showing</p>
+          <strong>${chFilter === 'all' ? 'All chapters (1–6)' : escapeHtml(blocks[0]?.chapter?.title || 'Chapter')}</strong>
+        </div>
+        <div class="meta">${blocks.reduce((s, b) => s + b.topics.length, 0)} topics · ${blocks.reduce(
+          (s, b) => s + b.formulaCount,
+          0
+        )} items</div>
+      </div>
+    </div>
+
+    ${
+      blocks.length
+        ? `<div class="formula-sheet-screen">${renderFormulaSheetHtml(blocks, { forPrint: false })}</div>`
+        : emptyState('No formulas', 'This chapter has no formula entries in the content bank.', 'All chapters', '#/formulas')
+    }
+  </div>`;
+}
+
+async function downloadFormulasPdf(chapterId = 'all') {
+  const blocks = getFormulaChapters(chapterId || 'all');
+  if (!blocks.length) {
+    toast('No formulas to export');
+    return;
+  }
+
+  toast('Generating PDF…');
+  const pack = renderFormulaSheetHtml(blocks, { forPrint: true });
+  if (!pack || typeof pack !== 'object' || !pack.html) {
+    toast('Could not build PDF');
+    return;
+  }
+
+  let host = document.getElementById('formula-pdf-host');
+  if (!host) {
+    host = document.createElement('div');
+    host.id = 'formula-pdf-host';
+    host.className = 'formula-pdf-host';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
+  }
+
+  host.innerHTML = `<style>${pack.css}</style><div class="formula-pdf-sheet">${pack.html}</div>`;
+  const sheet = host.querySelector('.formula-pdf-sheet');
+
+  try {
+    if (window.MathJax?.typesetClear) {
+      try {
+        MathJax.typesetClear([sheet]);
+      } catch (_) {
+        /* ignore */
+      }
+    }
+    if (window.MathJax?.typesetPromise) {
+      await MathJax.typesetPromise([sheet]);
+    }
+    await new Promise((r) => setTimeout(r, 350));
+
+    const html2pdf = await loadHtml2Pdf();
+    const chLabel =
+      chapterId === 'all' || !blocks[0]?.chapter
+        ? 'all-chapters'
+        : `ch${blocks[0].chapter.number}`;
+    const filename = `ENEX254-EM-Formula-Sheet-${chLabel}.pdf`;
+
+    await html2pdf()
+      .set({
+        margin: [10, 10, 10, 10],
+        filename,
+        image: { type: 'jpeg', quality: 0.96 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff',
+          windowWidth: 794,
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'], avoid: ['.eq-row', 'tr', '.formula-table-md table'] },
+      })
+      .from(sheet)
+      .save();
+
+    toast('PDF downloaded');
+  } catch (err) {
+    console.error(err);
+    toast('Could not download PDF');
+  } finally {
+    host.innerHTML = '';
+  }
+}
+
 function viewProgress() {
   const ready = computeReadiness(app.content, app.state);
   return `
@@ -3251,6 +3695,9 @@ function onSearchInput(e) {
   for (const t of app.content.topics) {
     if (t.title.toLowerCase().includes(q) || (t.preamble || '').toLowerCase().includes(q)) {
       hits.push({ type: 'Topic', title: t.title, route: `#/topic/${t.id}` });
+    }
+    if ((t.formulas || []).some((f) => String(f).toLowerCase().includes(q))) {
+      hits.push({ type: 'Formula', title: t.title, route: `#/formulas?ch=${encodeURIComponent(t.chapterId)}` });
     }
   }
   for (const t of app.content.syllabus?.topics || []) {

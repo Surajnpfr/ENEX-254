@@ -2,7 +2,7 @@
 
 export function renderMarkdown(src = '') {
   if (!src) return '';
-  let text = String(src);
+  let text = String(src).replace(/\r\n?/g, '\n');
   // protect math
   const slots = [];
   text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => {
@@ -22,8 +22,8 @@ export function renderMarkdown(src = '') {
 
   // code fences
   text = text.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
-  // tables (simple)
-  text = text.replace(/(^\|.+\|\n\|[-:\s|]+\|\n(?:\|.+\|\n?)*)/gm, (block) => {
+  // tables (simple) — allow CRLF-normalized newlines
+  text = text.replace(/(^\|.+\|\n\|[-: \t|]+\|\n(?:\|.+\|\n?)*)/gm, (block) => {
     const rows = block.trim().split('\n').filter(Boolean);
     if (rows.length < 2) return block;
     const parseRow = (r) =>

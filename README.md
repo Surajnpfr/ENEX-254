@@ -29,6 +29,7 @@ Open: http://localhost:8080/em-prep/
 ## Features
 
 - Syllabus coverage tree (35 topics from `Syllabus/EM.md`)
+- Chapter-wise **Formula sheet** + PDF download (print → Save as PDF)
 - Coverage vs mastery (separate metrics)
 - What's left + estimated remaining study time
 - Chapter-wise question practice (177 Q from `EMSolutions.md`)

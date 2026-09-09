@@ -313,7 +313,7 @@
       "chapterNumber": 1,
       "title": "Reference Formulas for Chapter 1",
       "isReference": true,
-      "preamble": "The following relations are used repeatedly throughout this chapter. They should be memorised, since the formula sheet supplied in the examination contains only the divergence, gradient, curl and Laplacian operators — not the coordinate transformations.\n\n**(A) Cartesian ↔ Cylindrical — point transformation**\n\n$$\n\\rho = \\sqrt{x^{2}+y^{2}},\\qquad\n\\phi = \\tan^{-1}\\!\\frac{y}{x},\\qquad\nz = z\n$$\n\n$$\nx = \\rho\\cos\\phi,\\qquad\ny = \\rho\\sin\\phi,\\qquad\nz = z\n$$\n\n**(B) Cartesian → Cylindrical — vector components**\n\n$$\nA_{\\rho} = A_{x}\\cos\\phi + A_{y}\\sin\\phi\n$$\n\n$$\nA_{\\phi} = -A_{x}\\sin\\phi + A_{y}\\cos\\phi\n$$\n\n$$\nA_{z} = A_{z}\n$$\n\n**(C) Cylindrical → Cartesian — vector components**\n\n$$\nA_{x} = A_{\\rho}\\cos\\phi - A_{\\phi}\\sin\\phi\n$$\n\n$$\nA_{y} = A_{\\rho}\\sin\\phi + A_{\\phi}\\cos\\phi\n$$\n\n$$\nA_{z} = A_{z}\n$$\n\n**(D) Cartesian ↔ Spherical — point transformation**\n\n$$\nr = \\sqrt{x^{2}+y^{2}+z^{2}},\\qquad\n\\theta = \\cos^{-1}\\!\\frac{z}{r} = \\tan^{-1}\\!\\frac{\\sqrt{x^{2}+y^{2}}}{z},\\qquad\n\\phi = \\tan^{-1}\\!\\frac{y}{x}\n$$\n\n$$\nx = r\\sin\\theta\\cos\\phi,\\qquad\ny = r\\sin\\theta\\sin\\phi,\\qquad\nz = r\\cos\\theta\n$$\n\n**(E) Cartesian → Spherical — vector components**\n\n$$\nA_{r} = A_{x}\\sin\\theta\\cos\\phi + A_{y}\\sin\\theta\\sin\\phi + A_{z}\\cos\\theta\n$$\n\n$$\nA_{\\theta} = A_{x}\\cos\\theta\\cos\\phi + A_{y}\\cos\\theta\\sin\\phi - A_{z}\\sin\\theta\n$$\n\n$$\nA_{\\phi} = -A_{x}\\sin\\phi + A_{y}\\cos\\phi\n$$\n\n**(F) Cylindrical → Spherical — unit vector relations**\n\n$$\n\\hat{a}_{\\rho} = \\sin\\theta\\,\\hat{a}_{r} + \\cos\\theta\\,\\hat{a}_{\\theta}\n$$\n\n$$\n\\hat{a}_{z} = \\cos\\theta\\,\\hat{a}_{r} - \\sin\\theta\\,\\hat{a}_{\\theta}\n$$\n\n$$\n\\hat{a}_{\\phi} = \\hat{a}_{\\phi},\\qquad z = r\\cos\\theta\n$$\n\n**(G) Quadrant rule for $\\phi$ — the most common source of error**\n\nThe calculator’s $\\tan^{-1}$ returns a value only in $(-90^{\\circ},+90^{\\circ})$. Always fix the quadrant from the signs of $x$ and $y$:\n\n| Quadrant | Signs | Correction | Range |\n|---|---|---|---|\n| I | $x>0$, $y>0$ | $\\phi=\\tan^{-1}\\|y/x\\|$ | $0^{\\circ}$–$90^{\\circ}$ |\n| II | $x<0$, $y>0$ | $\\phi=180^{\\circ}-\\tan^{-1}\\|y/x\\|$ | $90^{\\circ}$–$180^{\\circ}$ |\n| III | $x<0$, $y<0$ | $\\phi=180^{\\circ}+\\tan^{-1}\\|y/x\\|$ | $180^{\\circ}$–$270^{\\circ}$ |\n| IV | $x>0$, $y<0$ | $\\phi=360^{\\circ}-\\tan^{-1}\\|y/x\\|$ | $270^{\\circ}$–$360^{\\circ}$ |\n\nUseful shortcut: once $\\rho$ is known, $\\cos\\phi = x/\\rho$ and $\\sin\\phi = y/\\rho$ directly — no quadrant ambiguity arises. This is used throughout the solutions below.\n\n<a id=\"coordinate-transformation-vector-scalar-fields\"></a>",
+      "preamble": "The following relations are used repeatedly throughout this chapter. They should be memorised, since the formula sheet supplied in the examination contains only the divergence, gradient, curl and Laplacian operators — not the coordinate transformations.\n\n**(A) Cartesian ↔ Cylindrical — point transformation**\n\n$$\n\\rho = \\sqrt{x^{2}+y^{2}},\\qquad\n\\phi = \\tan^{-1}\\!\\frac{y}{x},\\qquad\nz = z\n$$\n\n$$\nx = \\rho\\cos\\phi,\\qquad\ny = \\rho\\sin\\phi,\\qquad\nz = z\n$$\n\n**(B) Cartesian → Cylindrical — vector components**\n\n$$\nA_{\\rho} = A_{x}\\cos\\phi + A_{y}\\sin\\phi\n$$\n\n$$\nA_{\\phi} = -A_{x}\\sin\\phi + A_{y}\\cos\\phi\n$$\n\n$$\nA_{z} = A_{z}\n$$\n\n**(C) Cylindrical → Cartesian — vector components**\n\n$$\nA_{x} = A_{\\rho}\\cos\\phi - A_{\\phi}\\sin\\phi\n$$\n\n$$\nA_{y} = A_{\\rho}\\sin\\phi + A_{\\phi}\\cos\\phi\n$$\n\n$$\nA_{z} = A_{z}\n$$\n\n**(D) Cartesian ↔ Spherical — point transformation**\n\n$$\nr = \\sqrt{x^{2}+y^{2}+z^{2}},\\qquad\n\\theta = \\cos^{-1}\\!\\frac{z}{r} = \\tan^{-1}\\!\\frac{\\sqrt{x^{2}+y^{2}}}{z},\\qquad\n\\phi = \\tan^{-1}\\!\\frac{y}{x}\n$$\n\n$$\nx = r\\sin\\theta\\cos\\phi,\\qquad\ny = r\\sin\\theta\\sin\\phi,\\qquad\nz = r\\cos\\theta\n$$\n\n**(E) Cartesian → Spherical — vector components**\n\n$$\nA_{r} = A_{x}\\sin\\theta\\cos\\phi + A_{y}\\sin\\theta\\sin\\phi + A_{z}\\cos\\theta\n$$\n\n$$\nA_{\\theta} = A_{x}\\cos\\theta\\cos\\phi + A_{y}\\cos\\theta\\sin\\phi - A_{z}\\sin\\theta\n$$\n\n$$\nA_{\\phi} = -A_{x}\\sin\\phi + A_{y}\\cos\\phi\n$$\n\n**(F) Cylindrical → Spherical — unit vector relations**\n\n$$\n\\hat{a}_{\\rho} = \\sin\\theta\\,\\hat{a}_{r} + \\cos\\theta\\,\\hat{a}_{\\theta}\n$$\n\n$$\n\\hat{a}_{z} = \\cos\\theta\\,\\hat{a}_{r} - \\sin\\theta\\,\\hat{a}_{\\theta}\n$$\n\n$$\n\\hat{a}_{\\phi} = \\hat{a}_{\\phi},\\qquad z = r\\cos\\theta\n$$\n\n**(G) Quadrant rule for $\\phi$ — the most common source of error**\n\nThe calculator’s $\\tan^{-1}$ returns a value only in $(-90^{\\circ},+90^{\\circ})$. Always fix the quadrant from the signs of $x$ and $y$:\n\n| Quadrant | Signs | Correction | Range |\n|---|---|---|---|\n| I | $x>0$, $y>0$ | $\\phi=\\tan^{-1}\\|y/x\\|$ | $0^{\\circ}$–$90^{\\circ}$ |\n| II | $x<0$, $y>0$ | $\\phi=180^{\\circ}-\\tan^{-1}\\|y/x\\|$ | $90^{\\circ}$–$180^{\\circ}$ |\n| III | $x<0$, $y<0$ | $\\phi=180^{\\circ}+\\tan^{-1}\\|y/x\\|$ | $180^{\\circ}$–$270^{\\circ}$ |\n| IV | $x>0$, $y<0$ | $\\phi=360^{\\circ}-\\tan^{-1}\\|y/x\\|$ | $270^{\\circ}$–$360^{\\circ}$ |\n\nUseful shortcut: once $\\rho$ is known, $\\cos\\phi = x/\\rho$ and $\\sin\\phi = y/\\rho$ directly — no quadrant ambiguity arises. This is used throughout the solutions below.\n\n**(H) Differential elements — line, surface and volume**\n\n| System | Line $d\\mathbf{l}$ | Surface $d\\mathbf{S}$ (constant-coordinate faces) | Volume $dv$ |\n|---|---|---|---|\n| Cartesian | $dx\\,\\hat{a}_{x}+dy\\,\\hat{a}_{y}+dz\\,\\hat{a}_{z}$ | $dy\\,dz\\,\\hat{a}_{x}$; $dx\\,dz\\,\\hat{a}_{y}$; $dx\\,dy\\,\\hat{a}_{z}$ | $dx\\,dy\\,dz$ |\n| Cylindrical | $d\\rho\\,\\hat{a}_{\\rho}+\\rho\\,d\\phi\\,\\hat{a}_{\\phi}+dz\\,\\hat{a}_{z}$ | $\\rho\\,d\\phi\\,dz\\,\\hat{a}_{\\rho}$; $d\\rho\\,dz\\,\\hat{a}_{\\phi}$; $\\rho\\,d\\rho\\,d\\phi\\,\\hat{a}_{z}$ | $\\rho\\,d\\rho\\,d\\phi\\,dz$ |\n| Spherical | $dr\\,\\hat{a}_{r}+r\\,d\\theta\\,\\hat{a}_{\\theta}+r\\sin\\theta\\,d\\phi\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,d\\theta\\,d\\phi\\,\\hat{a}_{r}$; $r\\sin\\theta\\,dr\\,d\\phi\\,\\hat{a}_{\\theta}$; $r\\,dr\\,d\\theta\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,dr\\,d\\theta\\,d\\phi$ |\n\n<a id=\"coordinate-transformation-vector-scalar-fields\"></a>",
       "formulas": [
         "\\rho = \\sqrt{x^{2}+y^{2}},\\qquad\n\\phi = \\tan^{-1}\\!\\frac{y}{x},\\qquad\nz = z",
         "x = \\rho\\cos\\phi,\\qquad\ny = \\rho\\sin\\phi,\\qquad\nz = z",
@@ -331,6 +331,20 @@
         "\\hat{a}_{\\rho} = \\sin\\theta\\,\\hat{a}_{r} + \\cos\\theta\\,\\hat{a}_{\\theta}",
         "\\hat{a}_{z} = \\cos\\theta\\,\\hat{a}_{r} - \\sin\\theta\\,\\hat{a}_{\\theta}",
         "\\hat{a}_{\\phi} = \\hat{a}_{\\phi},\\qquad z = r\\cos\\theta"
+      ],
+      "formulaTables": [
+        {
+          "id": "g",
+          "code": "G",
+          "title": "(G) Quadrant rule for $\\phi$ — the most common source of error",
+          "markdown": "| Quadrant | Signs | Correction | Range |\n|---|---|---|---|\n| I | $x>0$, $y>0$ | $\\phi=\\tan^{-1}\\|y/x\\|$ | $0^{\\circ}$–$90^{\\circ}$ |\n| II | $x<0$, $y>0$ | $\\phi=180^{\\circ}-\\tan^{-1}\\|y/x\\|$ | $90^{\\circ}$–$180^{\\circ}$ |\n| III | $x<0$, $y<0$ | $\\phi=180^{\\circ}+\\tan^{-1}\\|y/x\\|$ | $180^{\\circ}$–$270^{\\circ}$ |\n| IV | $x>0$, $y<0$ | $\\phi=360^{\\circ}-\\tan^{-1}\\|y/x\\|$ | $270^{\\circ}$–$360^{\\circ}$ |"
+        },
+        {
+          "id": "h",
+          "code": "H",
+          "title": "(H) Differential elements — line, surface and volume",
+          "markdown": "| System | Line $d\\mathbf{l}$ | Surface $d\\mathbf{S}$ (constant-coordinate faces) | Volume $dv$ |\n|---|---|---|---|\n| Cartesian | $dx\\,\\hat{a}_{x}+dy\\,\\hat{a}_{y}+dz\\,\\hat{a}_{z}$ | $dy\\,dz\\,\\hat{a}_{x}$; $dx\\,dz\\,\\hat{a}_{y}$; $dx\\,dy\\,\\hat{a}_{z}$ | $dx\\,dy\\,dz$ |\n| Cylindrical | $d\\rho\\,\\hat{a}_{\\rho}+\\rho\\,d\\phi\\,\\hat{a}_{\\phi}+dz\\,\\hat{a}_{z}$ | $\\rho\\,d\\phi\\,dz\\,\\hat{a}_{\\rho}$; $d\\rho\\,dz\\,\\hat{a}_{\\phi}$; $\\rho\\,d\\rho\\,d\\phi\\,\\hat{a}_{z}$ | $\\rho\\,d\\rho\\,d\\phi\\,dz$ |\n| Spherical | $dr\\,\\hat{a}_{r}+r\\,d\\theta\\,\\hat{a}_{\\theta}+r\\sin\\theta\\,d\\phi\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,d\\theta\\,d\\phi\\,\\hat{a}_{r}$; $r\\sin\\theta\\,dr\\,d\\phi\\,\\hat{a}_{\\theta}$; $r\\,dr\\,d\\theta\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,dr\\,d\\theta\\,d\\phi$ |"
+        }
       ],
       "definitions": [
         {
@@ -354,7 +368,8 @@
         "(D) Cartesian ↔ Spherical — point transformation",
         "(E) Cartesian → Spherical — vector components",
         "(F) Cylindrical → Spherical — unit vector relations",
-        "(G) Quadrant rule for $\\phi$ — the most common source of error"
+        "(G) Quadrant rule for $\\phi$ — the most common source of error",
+        "(H) Differential elements — line, surface and volume"
       ],
       "commonMistakes": [
         "Skipping units on the final answer.",
@@ -397,6 +412,7 @@
         "\\mathbf{A}\\times\\mathbf{B}=|\\mathbf{A}||\\mathbf{B}|\\sin\\theta\\,\\mathbf{a}_{n}=\\begin{vmatrix}\\mathbf{a}_{x}&\\mathbf{a}_{y}&\\mathbf{a}_{z}\\\\ A_{x}&A_{y}&A_{z}\\\\ B_{x}&B_{y}&B_{z}\\end{vmatrix}",
         "|\\mathbf{A}|=\\sqrt{3^{2}+(-4)^{2}+12^{2}}=\\sqrt{9+16+144}=\\sqrt{169}=13"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch1-coordinate-transformation-vector-scalar-fields-q1",
@@ -466,7 +482,7 @@
       "chapterNumber": 2,
       "title": "Reference Formulas for Chapter 2",
       "isReference": true,
-      "preamble": "**(A) Physical constants**\n\n$$\n\\varepsilon_{0} = 8.854\\times 10^{-12}\\ \\mathrm{F/m},\\qquad\n\\frac{1}{4\\pi\\varepsilon_{0}} = 9\\times 10^{9}\\ \\mathrm{m/F},\\qquad\n\\frac{1}{2\\pi\\varepsilon_{0}} = 1.7975\\times 10^{10}\\ \\mathrm{m/F}\n$$\n\n**(B) Coulomb’s law and the field of a point charge**\n\n$$\n\\mathbf{F}_{12} = \\frac{Q_{1}Q_{2}}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R_{12}},\\qquad\n\\mathbf{E} = \\frac{Q}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R},\\qquad\n\\mathbf{D} = \\varepsilon_{0}\\mathbf{E} = \\frac{Q}{4\\pi R^{2}}\\,\\hat{a}_{R}\n$$\n\nwhere $\\mathbf{R}$ is the vector from the charge to the field point and $\\hat{a}_{R} = \\mathbf{R}/|\\mathbf{R}|$.\n\n**(C) Standard charge configurations (results derived in this chapter)**\n\n| Configuration | $\\mathbf{E}$ | Notes |\n|---|---|---|\n| Point charge $Q$ | $\\displaystyle\\frac{Q}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R}$ | $R$ = distance charge → point |\n| Infinite line charge $\\rho_{L}$ | $\\displaystyle\\frac{\\rho_{L}}{2\\pi\\varepsilon_{0}\\rho}\\,\\hat{a}_{\\rho}$ | $\\rho$ = perpendicular distance from the line |\n| Infinite sheet charge $\\rho_{S}$ | $\\displaystyle\\frac{\\rho_{S}}{2\\varepsilon_{0}}\\,\\hat{a}_{N}$ | independent of distance; $\\hat{a}_{N}$ points from the sheet toward the field point |\n\n**(D) Gauss’s law**\n\n$$\n\\oint_{S}\\mathbf{D}\\cdot d\\mathbf{S} = Q_{\\mathrm{enc}}\n\\quad\\text{(integral form)},\\qquad\n\\nabla\\cdot\\mathbf{D} = \\rho_{v}\n\\quad\\text{(point form)}\n$$\n\n**(E) The three golden rules for superposition problems**\n\n1. **Direction first.** For each source, find the unit vector pointing from the source to the field point. Nearly all lost marks come from a wrong sign here.\n2. **For a line charge, use the perpendicular distance.** If the line is parallel to the $x$-axis, the coordinate $x$ of the field point is irrelevant — only the $(y,z)$ offsets matter. Likewise for lines parallel to $y$ or $z$.\n3. **For a sheet charge, only the side matters.** The magnitude $\\rho_{S}/(2\\varepsilon_{0})$ is the same everywhere; only the sign of $\\hat{a}_{N}$ changes depending on which side of the sheet the field point lies.\n\n**(F) Divergence operator (supplied on the examination formula sheet)**\n\n$$\n\\begin{aligned}\n\\text{Cartesian:}&\\quad\n\\nabla\\cdot\\mathbf{D}\n= \\frac{\\partial D_{x}}{\\partial x}+\\frac{\\partial D_{y}}{\\partial y}+\\frac{\\partial D_{z}}{\\partial z}\\\\[4pt]\n\\text{Cylindrical:}&\\quad\n\\nabla\\cdot\\mathbf{D}\n= \\frac{1}{\\rho}\\frac{\\partial(\\rho D_{\\rho})}{\\partial\\rho}\n+\\frac{1}{\\rho}\\frac{\\partial D_{\\phi}}{\\partial\\phi}\n+\\frac{\\partial D_{z}}{\\partial z}\\\\[4pt]\n\\text{Spherical:}&\\quad\n\\nabla\\cdot\\mathbf{D}\n= \\frac{1}{r^{2}}\\frac{\\partial(r^{2}D_{r})}{\\partial r}\n+\\frac{1}{r\\sin\\theta}\\frac{\\partial(D_{\\theta}\\sin\\theta)}{\\partial\\theta}\n+\\frac{1}{r\\sin\\theta}\\frac{\\partial D_{\\phi}}{\\partial\\phi}\n\\end{aligned}\n$$\n\n**(G) Divergence theorem**\n\n$$\n\\oint_{S}\\mathbf{D}\\cdot d\\mathbf{S}\n= \\int_{v}(\\nabla\\cdot\\mathbf{D})\\,dv\n$$\n\nIt converts a closed surface integral into a volume integral over the enclosed volume.\n\n**(H) Differential elements — essential for the integrals**\n\n| System | Volume $dv$ | Surface $d\\mathbf{S}$ (constant-coordinate faces) |\n|---|---|---|\n| Cartesian | $dx\\,dy\\,dz$ | $dy\\,dz\\,\\hat{a}_{x}$; $dx\\,dz\\,\\hat{a}_{y}$; $dx\\,dy\\,\\hat{a}_{z}$ |\n| Cylindrical | $\\rho\\,d\\rho\\,d\\phi\\,dz$ | $\\rho\\,d\\phi\\,dz\\,\\hat{a}_{\\rho}$; $d\\rho\\,dz\\,\\hat{a}_{\\phi}$; $\\rho\\,d\\rho\\,d\\phi\\,\\hat{a}_{z}$ |\n| Spherical | $r^{2}\\sin\\theta\\,dr\\,d\\theta\\,d\\phi$ | $r^{2}\\sin\\theta\\,d\\theta\\,d\\phi\\,\\hat{a}_{r}$; $r\\sin\\theta\\,dr\\,d\\phi\\,\\hat{a}_{\\theta}$; $r\\,dr\\,d\\theta\\,\\hat{a}_{\\phi}$ |\n\n**(I) Standard integrals used repeatedly**\n\n$$\n\\int_{0}^{\\pi/2}\\sin^{2}\\phi\\,d\\phi\n= \\int_{0}^{\\pi/2}\\cos^{2}\\phi\\,d\\phi\n= \\frac{\\pi}{4},\\qquad\n\\int\\sin^{2}\\phi\\,d\\phi\n= \\frac{\\phi}{2}-\\frac{\\sin 2\\phi}{4}\n$$\n\n$$\n\\int\\sin\\theta\\cos\\theta\\,d\\theta = \\frac{1}{2}\\sin^{2}\\theta\n\\quad\\text{(or equivalently }\\tfrac{1}{2}\\text{ over }0\\to\\pi/2\\text{)},\n\\qquad\n\\int\\sin 2\\theta\\,d\\theta = -\\tfrac{1}{2}\\cos 2\\theta\n$$\n\n**Method note.** On each face of the closed surface, the outward normal is $+\\hat{a}_{u}$ on the face of larger coordinate $u$ and $-\\hat{a}_{u}$ on the face of smaller coordinate $u$. Getting these six signs right is the whole problem.\n\n<a id=\"coulombs-law-field-intensity-flux-density-gausss-law\"></a>",
+      "preamble": "**(A) Physical constants**\n\n$$\n\\varepsilon_{0} = 8.854\\times 10^{-12}\\ \\mathrm{F/m},\\qquad\n\\frac{1}{4\\pi\\varepsilon_{0}} = 9\\times 10^{9}\\ \\mathrm{m/F},\\qquad\n\\frac{1}{2\\pi\\varepsilon_{0}} = 1.7975\\times 10^{10}\\ \\mathrm{m/F}\n$$\n\n**(B) Coulomb’s law and the field of a point charge**\n\n$$\n\\mathbf{F}_{12} = \\frac{Q_{1}Q_{2}}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R_{12}},\\qquad\n\\mathbf{E} = \\frac{Q}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R},\\qquad\n\\mathbf{D} = \\varepsilon_{0}\\mathbf{E} = \\frac{Q}{4\\pi R^{2}}\\,\\hat{a}_{R}\n$$\n\nwhere $\\mathbf{R}$ is the vector from the charge to the field point and $\\hat{a}_{R} = \\mathbf{R}/|\\mathbf{R}|$.\n\n**(C) Standard charge configurations (results derived in this chapter)**\n\n| Configuration | $\\mathbf{E}$ | Notes |\n|---|---|---|\n| Point charge $Q$ | $\\displaystyle\\frac{Q}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R}$ | $R$ = distance charge → point |\n| Infinite line charge $\\rho_{L}$ | $\\displaystyle\\frac{\\rho_{L}}{2\\pi\\varepsilon_{0}\\rho}\\,\\hat{a}_{\\rho}$ | $\\rho$ = perpendicular distance from the line |\n| Infinite sheet charge $\\rho_{S}$ | $\\displaystyle\\frac{\\rho_{S}}{2\\varepsilon_{0}}\\,\\hat{a}_{N}$ | independent of distance; $\\hat{a}_{N}$ points from the sheet toward the field point |\n\n**(D) Gauss’s law**\n\n$$\n\\oint_{S}\\mathbf{D}\\cdot d\\mathbf{S} = Q_{\\mathrm{enc}}\n\\quad\\text{(integral form)},\\qquad\n\\nabla\\cdot\\mathbf{D} = \\rho_{v}\n\\quad\\text{(point form)}\n$$\n\n**(E) The three golden rules for superposition problems**\n\n1. **Direction first.** For each source, find the unit vector pointing from the source to the field point. Nearly all lost marks come from a wrong sign here.\n2. **For a line charge, use the perpendicular distance.** If the line is parallel to the $x$-axis, the coordinate $x$ of the field point is irrelevant — only the $(y,z)$ offsets matter. Likewise for lines parallel to $y$ or $z$.\n3. **For a sheet charge, only the side matters.** The magnitude $\\rho_{S}/(2\\varepsilon_{0})$ is the same everywhere; only the sign of $\\hat{a}_{N}$ changes depending on which side of the sheet the field point lies.\n\n**(F) Divergence operator (supplied on the examination formula sheet)**\n\n$$\n\\begin{aligned}\n\\text{Cartesian:}&\\quad\n\\nabla\\cdot\\mathbf{D}\n= \\frac{\\partial D_{x}}{\\partial x}+\\frac{\\partial D_{y}}{\\partial y}+\\frac{\\partial D_{z}}{\\partial z}\\\\[4pt]\n\\text{Cylindrical:}&\\quad\n\\nabla\\cdot\\mathbf{D}\n= \\frac{1}{\\rho}\\frac{\\partial(\\rho D_{\\rho})}{\\partial\\rho}\n+\\frac{1}{\\rho}\\frac{\\partial D_{\\phi}}{\\partial\\phi}\n+\\frac{\\partial D_{z}}{\\partial z}\\\\[4pt]\n\\text{Spherical:}&\\quad\n\\nabla\\cdot\\mathbf{D}\n= \\frac{1}{r^{2}}\\frac{\\partial(r^{2}D_{r})}{\\partial r}\n+\\frac{1}{r\\sin\\theta}\\frac{\\partial(D_{\\theta}\\sin\\theta)}{\\partial\\theta}\n+\\frac{1}{r\\sin\\theta}\\frac{\\partial D_{\\phi}}{\\partial\\phi}\n\\end{aligned}\n$$\n\n**(G) Divergence theorem**\n\n$$\n\\oint_{S}\\mathbf{D}\\cdot d\\mathbf{S}\n= \\int_{v}(\\nabla\\cdot\\mathbf{D})\\,dv\n$$\n\nIt converts a closed surface integral into a volume integral over the enclosed volume.\n\n**(H) Differential elements — essential for the integrals**\n\n| System | Line $d\\mathbf{l}$ | Surface $d\\mathbf{S}$ (constant-coordinate faces) | Volume $dv$ |\n|---|---|---|---|\n| Cartesian | $dx\\,\\hat{a}_{x}+dy\\,\\hat{a}_{y}+dz\\,\\hat{a}_{z}$ | $dy\\,dz\\,\\hat{a}_{x}$; $dx\\,dz\\,\\hat{a}_{y}$; $dx\\,dy\\,\\hat{a}_{z}$ | $dx\\,dy\\,dz$ |\n| Cylindrical | $d\\rho\\,\\hat{a}_{\\rho}+\\rho\\,d\\phi\\,\\hat{a}_{\\phi}+dz\\,\\hat{a}_{z}$ | $\\rho\\,d\\phi\\,dz\\,\\hat{a}_{\\rho}$; $d\\rho\\,dz\\,\\hat{a}_{\\phi}$; $\\rho\\,d\\rho\\,d\\phi\\,\\hat{a}_{z}$ | $\\rho\\,d\\rho\\,d\\phi\\,dz$ |\n| Spherical | $dr\\,\\hat{a}_{r}+r\\,d\\theta\\,\\hat{a}_{\\theta}+r\\sin\\theta\\,d\\phi\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,d\\theta\\,d\\phi\\,\\hat{a}_{r}$; $r\\sin\\theta\\,dr\\,d\\phi\\,\\hat{a}_{\\theta}$; $r\\,dr\\,d\\theta\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,dr\\,d\\theta\\,d\\phi$ |\n\n**(I) Standard integrals used repeatedly**\n\n$$\n\\int_{0}^{\\pi/2}\\sin^{2}\\phi\\,d\\phi\n= \\int_{0}^{\\pi/2}\\cos^{2}\\phi\\,d\\phi\n= \\frac{\\pi}{4},\\qquad\n\\int\\sin^{2}\\phi\\,d\\phi\n= \\frac{\\phi}{2}-\\frac{\\sin 2\\phi}{4}\n$$\n\n$$\n\\int\\sin\\theta\\cos\\theta\\,d\\theta = \\frac{1}{2}\\sin^{2}\\theta\n\\quad\\text{(or equivalently }\\tfrac{1}{2}\\text{ over }0\\to\\pi/2\\text{)},\n\\qquad\n\\int\\sin 2\\theta\\,d\\theta = -\\tfrac{1}{2}\\cos 2\\theta\n$$\n\n**Method note.** On each face of the closed surface, the outward normal is $+\\hat{a}_{u}$ on the face of larger coordinate $u$ and $-\\hat{a}_{u}$ on the face of smaller coordinate $u$. Getting these six signs right is the whole problem.\n\n<a id=\"coulombs-law-field-intensity-flux-density-gausss-law\"></a>",
       "formulas": [
         "\\varepsilon_{0} = 8.854\\times 10^{-12}\\ \\mathrm{F/m},\\qquad\n\\frac{1}{4\\pi\\varepsilon_{0}} = 9\\times 10^{9}\\ \\mathrm{m/F},\\qquad\n\\frac{1}{2\\pi\\varepsilon_{0}} = 1.7975\\times 10^{10}\\ \\mathrm{m/F}",
         "\\mathbf{F}_{12} = \\frac{Q_{1}Q_{2}}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R_{12}},\\qquad\n\\mathbf{E} = \\frac{Q}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R},\\qquad\n\\mathbf{D} = \\varepsilon_{0}\\mathbf{E} = \\frac{Q}{4\\pi R^{2}}\\,\\hat{a}_{R}",
@@ -474,6 +490,20 @@
         "\\oint_{S}\\mathbf{D}\\cdot d\\mathbf{S}\n= \\int_{v}(\\nabla\\cdot\\mathbf{D})\\,dv",
         "\\int_{0}^{\\pi/2}\\sin^{2}\\phi\\,d\\phi\n= \\int_{0}^{\\pi/2}\\cos^{2}\\phi\\,d\\phi\n= \\frac{\\pi}{4},\\qquad\n\\int\\sin^{2}\\phi\\,d\\phi\n= \\frac{\\phi}{2}-\\frac{\\sin 2\\phi}{4}",
         "\\int\\sin\\theta\\cos\\theta\\,d\\theta = \\frac{1}{2}\\sin^{2}\\theta\n\\quad\\text{(or equivalently }\\tfrac{1}{2}\\text{ over }0\\to\\pi/2\\text{)},\n\\qquad\n\\int\\sin 2\\theta\\,d\\theta = -\\tfrac{1}{2}\\cos 2\\theta"
+      ],
+      "formulaTables": [
+        {
+          "id": "c",
+          "code": "C",
+          "title": "(C) Standard charge configurations (results derived in this chapter)",
+          "markdown": "| Configuration | $\\mathbf{E}$ | Notes |\n|---|---|---|\n| Point charge $Q$ | $\\displaystyle\\frac{Q}{4\\pi\\varepsilon_{0}R^{2}}\\,\\hat{a}_{R}$ | $R$ = distance charge → point |\n| Infinite line charge $\\rho_{L}$ | $\\displaystyle\\frac{\\rho_{L}}{2\\pi\\varepsilon_{0}\\rho}\\,\\hat{a}_{\\rho}$ | $\\rho$ = perpendicular distance from the line |\n| Infinite sheet charge $\\rho_{S}$ | $\\displaystyle\\frac{\\rho_{S}}{2\\varepsilon_{0}}\\,\\hat{a}_{N}$ | independent of distance; $\\hat{a}_{N}$ points from the sheet toward the field point |"
+        },
+        {
+          "id": "h",
+          "code": "H",
+          "title": "(H) Differential elements — essential for the integrals",
+          "markdown": "| System | Line $d\\mathbf{l}$ | Surface $d\\mathbf{S}$ (constant-coordinate faces) | Volume $dv$ |\n|---|---|---|---|\n| Cartesian | $dx\\,\\hat{a}_{x}+dy\\,\\hat{a}_{y}+dz\\,\\hat{a}_{z}$ | $dy\\,dz\\,\\hat{a}_{x}$; $dx\\,dz\\,\\hat{a}_{y}$; $dx\\,dy\\,\\hat{a}_{z}$ | $dx\\,dy\\,dz$ |\n| Cylindrical | $d\\rho\\,\\hat{a}_{\\rho}+\\rho\\,d\\phi\\,\\hat{a}_{\\phi}+dz\\,\\hat{a}_{z}$ | $\\rho\\,d\\phi\\,dz\\,\\hat{a}_{\\rho}$; $d\\rho\\,dz\\,\\hat{a}_{\\phi}$; $\\rho\\,d\\rho\\,d\\phi\\,\\hat{a}_{z}$ | $\\rho\\,d\\rho\\,d\\phi\\,dz$ |\n| Spherical | $dr\\,\\hat{a}_{r}+r\\,d\\theta\\,\\hat{a}_{\\theta}+r\\sin\\theta\\,d\\phi\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,d\\theta\\,d\\phi\\,\\hat{a}_{r}$; $r\\sin\\theta\\,dr\\,d\\phi\\,\\hat{a}_{\\theta}$; $r\\,dr\\,d\\theta\\,\\hat{a}_{\\phi}$ | $r^{2}\\sin\\theta\\,dr\\,d\\theta\\,d\\phi$ |"
+        }
       ],
       "definitions": [],
       "questionIds": [],
@@ -534,6 +564,7 @@
         "F=\\frac{1}{4\\pi\\varepsilon_{0}}\\frac{|Q_{1}Q_{2}|}{R^{2}}",
         "F=9\\times 10^{9}\\frac{(1\\times 10^{-6})(2\\times 10^{-6})}{(0.5)^{2}}=9\\times 10^{9}\\frac{2\\times 10^{-12}}{0.25}=0.072\\,\\mathrm{N}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch2-coulomb-s-law-field-intensity-flux-density-gauss-s-law-q1",
@@ -606,6 +637,7 @@
         "\\nabla\\cdot\\mathbf{A}=2+1+1=4",
         "\\text{Flux}=\\int_{v}4\\,dv=4\\times(1)=4"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch2-divergence-divergence-theorem-q1",
@@ -670,6 +702,14 @@
         "\\mathbf{D}=\\varepsilon_{0}\\mathbf{E}\\quad\\text{(free space)},\\qquad\\mathbf{D}=\\varepsilon\\mathbf{E}=\\varepsilon_{r}\\varepsilon_{0}\\mathbf{E}\\quad\\text{(linear dielectric)}",
         "\\Psi=\\int_{S}\\mathbf{D}\\cdot d\\mathbf{S}",
         "\\mathbf{D}=\\varepsilon_{0}\\mathbf{E}=(8.854\\times 10^{-12})(100)\\,\\mathbf{a}_{x}=8.854\\times 10^{-10}\\,\\mathbf{a}_{x}\\,\\mathrm{C/m}^{2}"
+      ],
+      "formulaTables": [
+        {
+          "id": "k",
+          "code": "K",
+          "title": "(K) Potential of standard configurations",
+          "markdown": "| Source | Potential | Reference |\n|---|---|---|\n| Point charge $Q$ | $V=\\dfrac{Q}{4\\pi\\varepsilon_{0}R}$ | $V=0$ at $R=\\infty$ |\n| Line charge $\\rho_{L}$ | $V_{A}-V_{B}=\\dfrac{\\rho_{L}}{2\\pi\\varepsilon_{0}}\\ln\\dfrac{\\rho_{B}}{\\rho_{A}}$ | $V=0$ at $\\infty$ is impossible; use a finite reference |\n| Sheet charge $\\rho_{s}$ | $V_{A}-V_{B}=-\\dfrac{\\rho_{s}}{2\\varepsilon_{0}}(x_{A}-x_{B})$ | sheet at $x=0$, valid for $x>0$ |"
+        }
       ],
       "definitions": [],
       "questionIds": [
@@ -748,6 +788,7 @@
         "p=Qd=(1\\times 10^{-9})(0.01)=10^{-11}\\,\\mathrm{C\\cdot m}",
         "E=\\frac{1}{4\\pi\\varepsilon_{0}}\\frac{2p}{r^{3}}=9\\times 10^{9}\\frac{2\\times 10^{-11}}{(0.5)^{3}}=9\\times 10^{9}\\frac{2\\times 10^{-11}}{0.125}=1.44\\,\\mathrm{V/m}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch2-electric-dipole-polarization-q1",
@@ -822,6 +863,7 @@
         "\\mathbf{E}=\\frac{1}{4\\pi\\varepsilon_{0}}\\int\\frac{\\rho_{L}\\,dl}{R^{2}}\\mathbf{a}_{R}=\\frac{1}{4\\pi\\varepsilon_{0}}\\int\\frac{\\rho_{S}\\,dS}{R^{2}}\\mathbf{a}_{R}=\\frac{1}{4\\pi\\varepsilon_{0}}\\int\\frac{\\rho_{v}\\,dv}{R^{2}}\\mathbf{a}_{R}",
         "E=9\\times 10^{9}\\frac{1\\times 10^{-9}}{(0.1)^{2}}=9\\times 10^{9}\\times 10^{-7}=900\\,\\mathrm{V/m}"
       ],
+      "formulaTables": [],
       "definitions": [
         {
           "term": "The tangential component of $\\mathbf{E}$",
@@ -896,6 +938,14 @@
         "\\nabla\\cdot\\mathbf{J}=-\\frac{\\partial\\rho_{v}}{\\partial t}",
         "\\tau=\\frac{\\varepsilon}{\\sigma}"
       ],
+      "formulaTables": [
+        {
+          "id": "u",
+          "code": "U",
+          "title": "(U) Relaxation time",
+          "markdown": "| Material | $n$ with $T$ | $\\mu$ with $T$ | $\\sigma$ with $T$ | Temp. coeff. |\n|---|---|---|---|---|\n| Metal | constant | decreases | decreases | positive |\n| Semiconductor | increases (exp.) | decreases | increases | negative |"
+        }
+      ],
       "definitions": [],
       "questionIds": [
         "ch2-current-density-continuity-equation-relaxation-time-q1",
@@ -966,6 +1016,14 @@
         "V=Ax+B;\\quad V(0)=0\\Rightarrow B=0;\\quad V(0.02)=100\\Rightarrow A=5000",
         "V=5000x\\qquad(x\\text{ in metres, }V\\text{ in volts})",
         "\\mathbf{E}=-\\nabla V=-5000\\,\\mathbf{a}_{x}\\,\\mathrm{V/m}=-5\\,\\mathrm{kV/m}\\,\\mathbf{a}_{x}"
+      ],
+      "formulaTables": [
+        {
+          "id": "y",
+          "code": "Y",
+          "title": "(Y) The three standard results (derived below)",
+          "markdown": "| Capacitor | Geometry | Capacitance |\n|---|---|---|\n| Parallel plate | area $S$, separation $d$ | $C=\\varepsilon S/d$ |\n| Coaxial cable | radii $a<b$, length $L$ | $C=2\\pi\\varepsilon L/\\ln(b/a)$ |\n| Spherical | radii $a<b$ | $C=4\\pi\\varepsilon/\\bigl(1/a-1/b\\bigr)=4\\pi\\varepsilon ab/(b-a)$ |"
+        }
       ],
       "definitions": [],
       "questionIds": [
@@ -1042,6 +1100,7 @@
         "\\hat{a}_{y}\\times\\hat{a}_{x}=-\\hat{a}_{z},\\qquad\n\\hat{a}_{z}\\times\\hat{a}_{y}=-\\hat{a}_{x},\\qquad\n\\hat{a}_{x}\\times\\hat{a}_{z}=-\\hat{a}_{y}",
         "\\hat{a}_{\\phi}=-\\sin\\phi\\,\\hat{a}_{x}+\\cos\\phi\\,\\hat{a}_{y},\n\\qquad\n\\cos\\phi=\\frac{x}{\\rho},\\quad\\sin\\phi=\\frac{y}{\\rho}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [],
       "priorityBase": 82,
@@ -1103,6 +1162,7 @@
         "H=\\frac{I}{4\\pi\\rho}(\\sin\\alpha_{1}+\\sin\\alpha_{2})",
         "H=\\frac{I}{2a}=\\frac{10}{2\\times 0.1}=50\\,\\mathrm{A/m}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch3-biot-savart-law-ampere-s-circuital-law-q1",
@@ -1176,6 +1236,14 @@
         "\\nabla\\times\\mathbf{A}=\\lim_{\\Delta S\\to 0}\\frac{1}{\\Delta S}\\oint_{L}\\mathbf{A}\\cdot d\\mathbf{L}\\,\\mathbf{a}_{n}",
         "\\int_{S}(\\nabla\\times\\mathbf{A})\\cdot d\\mathbf{S}=\\oint_{L}\\mathbf{A}\\cdot d\\mathbf{L}",
         "\\nabla\\times\\mathbf{A}=\\begin{vmatrix}\\mathbf{a}_{x}&\\mathbf{a}_{y}&\\mathbf{a}_{z}\\\\ \\partial/\\partial x&\\partial/\\partial y&\\partial/\\partial z\\\\ -y&x&0\\end{vmatrix}=\\mathbf{a}_{z}\\!\\left(\\frac{\\partial}{\\partial x}(x)-\\frac{\\partial}{\\partial y}(-y)\\right)=2\\mathbf{a}_{z}"
+      ],
+      "formulaTables": [
+        {
+          "id": "k",
+          "code": "K",
+          "title": "(K) Differential surface elements — needed for the right-hand side",
+          "markdown": "| Surface | $\\mathrm{d}\\mathbf{S}$ | Boundary element $\\mathrm{d}\\mathbf{L}$ |\n|---|---|---|\n| Plane $z=\\mathrm{const}$ | $\\mathrm{d}x\\,\\mathrm{d}y\\,\\hat{a}_{z}$ | $\\mathrm{d}x\\hat{a}_{x}$ or $\\mathrm{d}y\\hat{a}_{y}$ |\n| Cylinder $\\rho=\\mathrm{const}$ | $\\rho\\,\\mathrm{d}\\phi\\,\\mathrm{d}z\\,\\hat{a}_{\\rho}$ | $\\rho\\,\\mathrm{d}\\phi\\hat{a}_{\\phi}$ or $\\mathrm{d}z\\hat{a}_{z}$ |\n| Sphere $r=\\mathrm{const}$ | $r^{2}\\sin\\theta\\,\\mathrm{d}\\theta\\,\\mathrm{d}\\phi\\,\\hat{a}_{r}$ | $r\\,\\mathrm{d}\\theta\\hat{a}_{\\theta}$ or $r\\sin\\theta\\,\\mathrm{d}\\phi\\hat{a}_{\\phi}$ |\n| Cone $\\theta=\\mathrm{const}$ | $r\\sin\\theta\\,\\mathrm{d}r\\,\\mathrm{d}\\phi\\,\\hat{a}_{\\theta}$ | $\\mathrm{d}r\\hat{a}_{r}$ or $r\\sin\\theta\\,\\mathrm{d}\\phi\\hat{a}_{\\phi}$ |"
+        }
       ],
       "definitions": [
         {
@@ -1259,6 +1327,14 @@
         "\\mathbf{A}=\\frac{\\mu_{0}}{4\\pi}\\int\\frac{I\\,d\\mathbf{L}}{R}=\\frac{\\mu_{0}}{4\\pi}\\int\\frac{\\mathbf{J}}{R}\\,dv",
         "\\mathbf{B}=\\nabla\\times\\mathbf{A}=\\begin{vmatrix}\\mathbf{a}_{x}&\\mathbf{a}_{y}&\\mathbf{a}_{z}\\\\ \\partial/\\partial x&\\partial/\\partial y&\\partial/\\partial z\\\\ \\mu_{0} y&0&0\\end{vmatrix}=-\\mu_{0}\\mathbf{a}_{z}"
       ],
+      "formulaTables": [
+        {
+          "id": "n",
+          "code": "N",
+          "title": "(N) Magnetic boundary conditions",
+          "markdown": "| | Continuous tangential | Continuous normal |\n|---|---|---|\n| Electric | $E_{t1}=E_{t2}$ always | $D_{N1}=D_{N2}$ if $\\rho_{s}=0$ |\n| Magnetic | $H_{t1}=H_{t2}$ only if $\\mathbf{K}=\\mathbf{0}$ | $B_{N1}=B_{N2}$ always |"
+        }
+      ],
       "definitions": [],
       "questionIds": [
         "ch3-scalar-vector-magnetic-potential-q1",
@@ -1326,6 +1402,7 @@
         "\\mathbf{m}=I\\mathbf{S},\\qquad\\mathbf{T}=\\mathbf{m}\\times\\mathbf{B}",
         "F=ILB=(5)(2)(0.5)=5\\,\\mathrm{N}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch3-magnetic-force-torque-boundary-conditions-q1",
@@ -1389,6 +1466,20 @@
         "\\mathbf{J}_{c}=\\sigma\\mathbf{E}\\quad\\text{(conduction)},\\qquad\n\\mathbf{J}_{d}=\\frac{\\partial\\mathbf{D}}{\\partial t}=\\varepsilon\\frac{\\partial\\mathbf{E}}{\\partial t}\\quad\\text{(displacement)}.",
         "\\frac{|\\mathbf{J}_{c}|}{|\\mathbf{J}_{d}|}=\\frac{\\sigma}{\\omega\\varepsilon}=\\frac{\\sigma}{2\\pi f\\varepsilon}=\\tan\\delta."
       ],
+      "formulaTables": [
+        {
+          "id": "b",
+          "code": "B",
+          "title": "(B) The three ways flux can change",
+          "markdown": "| Case | Name | EMF |\n|------|------|-----|\n| Loop fixed, $\\mathbf{B}$ varies | transformer emf | $\\displaystyle\\mathcal{E}=-\\int_{S}\\frac{\\partial\\mathbf{B}}{\\partial t}\\cdot d\\mathbf{S}$ |\n| Loop moves, $\\mathbf{B}$ static | motional emf | $\\displaystyle\\mathcal{E}=\\oint_{L}(\\mathbf{v}\\times\\mathbf{B})\\cdot d\\mathbf{L}$ |\n| Both | general case | $\\displaystyle\\mathcal{E}=-\\int_{S}\\frac{\\partial\\mathbf{B}}{\\partial t}\\cdot d\\mathbf{S}+\\oint_{L}(\\mathbf{v}\\times\\mathbf{B})\\cdot d\\mathbf{L}$ |"
+        },
+        {
+          "id": "c",
+          "code": "C",
+          "title": "(C) Maxwell’s equations — time-varying fields",
+          "markdown": "| Law | Point form | Integral form |\n|-----|------------|---------------|\n| Faraday | $\\nabla\\times\\mathbf{E}=-\\dfrac{\\partial\\mathbf{B}}{\\partial t}$ | $\\displaystyle\\oint_{L}\\mathbf{E}\\cdot d\\mathbf{L}=-\\dfrac{d}{dt}\\int_{S}\\mathbf{B}\\cdot d\\mathbf{S}$ |\n| Ampere (corrected) | $\\nabla\\times\\mathbf{H}=\\mathbf{J}+\\dfrac{\\partial\\mathbf{D}}{\\partial t}$ | $\\displaystyle\\oint_{L}\\mathbf{H}\\cdot d\\mathbf{L}=\\int_{S}\\left(\\mathbf{J}+\\dfrac{\\partial\\mathbf{D}}{\\partial t}\\right)\\cdot d\\mathbf{S}$ |\n| Gauss (electric) | $\\nabla\\cdot\\mathbf{D}=\\rho_{v}$ | $\\displaystyle\\oint_{S}\\mathbf{D}\\cdot d\\mathbf{S}=Q_{\\mathrm{enc}}$ |\n| Gauss (magnetic) | $\\nabla\\cdot\\mathbf{B}=0$ | $\\displaystyle\\oint_{S}\\mathbf{B}\\cdot d\\mathbf{S}=0$ |"
+        }
+      ],
       "definitions": [],
       "questionIds": [],
       "priorityBase": 72,
@@ -1444,6 +1535,7 @@
         "\\mathrm{EMF}=\\oint\\mathbf{E}\\cdot d\\mathbf{L}=-\\frac{d\\Phi}{dt}=-\\frac{d}{dt}\\int_{S}\\mathbf{B}\\cdot d\\mathbf{S}",
         "e=-\\frac{d\\Phi}{dt}=-0.5(-100\\sin(100t))=50\\sin(100t)\\,\\mathrm{V}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch4-faraday-s-law-motional-transformer-emf-q1",
@@ -1504,6 +1596,7 @@
         "I_{d}=\\int_{S}\\mathbf{J}_{d}\\cdot d\\mathbf{S}=\\frac{d\\Psi}{dt}=C\\frac{dV}{dt}\\quad\\text{(parallel-plate capacitor)}",
         "i=C\\frac{dv}{dt}=(200\\times 10^{-12})(1000)(1000)\\cos(1000t)=0.2\\times 10^{-3}\\cos(1000t)\\,\\mathrm{A}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch4-displacement-current-q1",
@@ -1566,6 +1659,7 @@
         "\\oint\\mathbf{E}\\cdot d\\mathbf{L}=-\\frac{d}{dt}\\int\\mathbf{B}\\cdot d\\mathbf{S},\\qquad\\oint\\mathbf{H}\\cdot d\\mathbf{L}=I_{\\mathrm{enc}}+\\frac{d}{dt}\\int\\mathbf{D}\\cdot d\\mathbf{S}",
         "H=\\frac{E}{\\eta_{0}}=\\frac{10}{377}\\approx 0.0265\\,\\mathrm{A/m}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch4-maxwell-s-equations-q1",
@@ -1645,6 +1739,20 @@
         "\\eta_{\\mathrm{in}}=\\eta_{2}\\frac{\\eta_{3}\\cos\\beta_{2}d+j\\eta_{2}\\sin\\beta_{2}d}{\\eta_{2}\\cos\\beta_{2}d+j\\eta_{3}\\sin\\beta_{2}d}",
         "d=\\frac{\\lambda_{2}}{4}:\\ \\eta_{\\mathrm{in}}=\\frac{\\eta_{2}^{2}}{\\eta_{3}}\n\\quad\\text{(quarter-wave)};\\qquad\nd=\\frac{\\lambda_{2}}{2}:\\ \\eta_{\\mathrm{in}}=\\eta_{3}\n\\quad\\text{(half-wave window)}"
       ],
+      "formulaTables": [
+        {
+          "id": "e",
+          "code": "E",
+          "title": "(E) The three standard media",
+          "markdown": "| Quantity | Free space ($\\sigma=0$) | Lossless dielectric ($\\sigma=0$) | Good conductor ($\\sigma\\gg\\omega\\varepsilon$) |\n|----------|-------------------------|-----------------------------------|-----------------------------------------------|\n| $\\alpha$ | $0$ | $0$ | $\\sqrt{\\pi f\\mu\\sigma}$ |\n| $\\beta$ | $\\omega\\sqrt{\\mu_{0}\\varepsilon_{0}}$ | $\\omega\\sqrt{\\mu\\varepsilon}$ | $\\sqrt{\\pi f\\mu\\sigma}$ |\n| $\\eta$ | $377\\,\\Omega$ | $\\sqrt{\\mu/\\varepsilon}$ | $\\sqrt{\\omega\\mu/\\sigma}\\,\\angle 45^{\\circ}$ |\n| $u$ | $3\\times 10^{8}\\,\\mathrm{m/s}$ | $1/\\sqrt{\\mu\\varepsilon}$ | $2\\omega/\\mu\\sigma$ (equiv. $\\omega\\delta$) |"
+        },
+        {
+          "id": "o",
+          "code": "O",
+          "title": "(O) Normal incidence",
+          "markdown": "| Case | $\\Gamma$ | $\\tau$ | Meaning |\n|------|----------|--------|---------|\n| $\\eta_{2}=\\eta_{1}$ (matched) | $0$ | $1$ | no reflection |\n| $\\eta_{2}=0$ (PEC) | $-1$ | $0$ | total reflection, phase reversed |\n| $\\eta_{2}=\\infty$ | $+1$ | $2$ | total reflection, no reversal |"
+        }
+      ],
       "definitions": [],
       "questionIds": [],
       "priorityBase": 82,
@@ -1706,6 +1814,7 @@
         "\\omega=2\\pi\\times 10^{8},\\qquad\\beta=\\omega\\sqrt{\\mu_{0}\\varepsilon_{0}\\varepsilon_{r}}=\\frac{\\omega}{c}\\sqrt{\\varepsilon_{r}}=\\frac{2\\pi\\times 10^{8}}{3\\times 10^{8}}\\times 2=4.189\\,\\mathrm{rad/m}",
         "v_{p}=\\frac{c}{\\sqrt{\\varepsilon_{r}}}=\\frac{3\\times 10^{8}}{2}=1.5\\times 10^{8}\\,\\mathrm{m/s}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch5-wave-propagation-field-derivations-q1",
@@ -1768,6 +1877,7 @@
         "P_{\\mathrm{av}}=\\frac{E^{2}}{2\\eta}",
         "P_{\\mathrm{av}}=\\frac{E^{2}}{2\\eta_{0}}=\\frac{100}{2\\times 377}\\approx 0.133\\,\\mathrm{W/m}^{2}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch5-poynting-theorem-skin-depth-loss-tangent-q1",
@@ -1827,6 +1937,7 @@
         "\\delta=\\sqrt{\\frac{2}{\\omega\\mu\\sigma}}=\\frac{1}{\\alpha},\\qquad\\alpha=\\beta=\\frac{1}{\\delta},\\qquad\\eta\\approx(1+j)\\frac{1}{\\sigma\\delta}",
         "\\delta=\\sqrt{\\frac{2}{\\omega\\mu_{0}\\sigma}}=\\sqrt{\\frac{2}{2\\pi\\times 10^{6}\\,(4\\pi\\times 10^{-7})\\,(5.8\\times 10^{7})}}\\approx 66.1\\,\\mu\\mathrm{m}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch5-numerical-problems-on-uniform-plane-waves-q1",
@@ -1893,6 +2004,7 @@
         "\\Gamma=\\frac{188.5-377}{188.5+377}=\\frac{-188.5}{565.5}\\approx -0.431",
         "\\tau=\\frac{2\\times 188.5}{565.5}\\approx 0.569"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch5-reflection-of-plane-waves-standing-wave-ratio-q1",
@@ -1960,6 +2072,20 @@
         "Z_{\\mathrm{in}}=Z_{0}\\frac{Z_{L}+Z_{0}\\tanh\\gamma\\ell}{Z_{0}+Z_{L}\\tanh\\gamma\\ell}\\qquad\\text{(lossy)}",
         "\\Gamma_{L}=\\frac{Z_{L}-Z_{0}}{Z_{L}+Z_{0}},\\qquad s=\\frac{1+|\\Gamma_{L}|}{1-|\\Gamma_{L}|}"
       ],
+      "formulaTables": [
+        {
+          "id": "d",
+          "code": "D",
+          "title": "(D) The two special lines",
+          "markdown": "| | Lossless ($R=G=0$) | Distortionless ($R/L=G/C$) |\n|---|---|---|\n| $\\alpha$ | $0$ | $\\sqrt{RG}$ (independent of $\\omega$) |\n| $\\beta$ | $\\omega\\sqrt{LC}$ | $\\omega\\sqrt{LC}$ |\n| $\\gamma$ | $j\\omega\\sqrt{LC}$ | $\\sqrt{RG}+j\\omega\\sqrt{LC}$ |\n| $Z_{0}$ | $\\sqrt{L/C}$ (real) | $\\sqrt{L/C}$ (real) |\n| $u$ | $1/\\sqrt{LC}$ | $1/\\sqrt{LC}$ |"
+        },
+        {
+          "id": "g",
+          "code": "G",
+          "title": "(G) Special cases worth knowing by sight",
+          "markdown": "| Condition | $Z_{\\mathrm{in}}$ | Name |\n|---|---|---|\n| $\\ell=\\lambda/2$ (or any $n\\lambda/2$) | $Z_{L}$ | half-wave repeater |\n| $\\ell=\\lambda/4$ | $Z_{0}^{2}/Z_{L}$ | quarter-wave transformer |\n| $Z_{L}=Z_{0}$ | $Z_{0}$ | matched — no reflection |\n| $Z_{L}=0$ (short) | $jZ_{0}\\tan\\beta\\ell$ | purely reactive |\n| $Z_{L}=\\infty$ (open) | $-jZ_{0}\\cot\\beta\\ell$ | purely reactive |"
+        }
+      ],
       "definitions": [],
       "questionIds": [],
       "priorityBase": 72,
@@ -2016,6 +2142,7 @@
         "\\alpha=\\sqrt{RG},\\qquad\\beta=\\omega\\sqrt{LC},\\qquad Z_{0}=\\sqrt{L/C}",
         "\\frac{R}{L}=\\frac{G}{C}\\implies G=\\frac{RC}{L}=\\frac{20\\times 20\\times 10^{-9}}{0.5\\times 10^{-3}}=4\\times 10^{-5}\\,\\mathrm{S/m}"
       ],
+      "formulaTables": [],
       "definitions": [],
       "questionIds": [
         "ch6-line-parameters-lossless-lossy-distortionless-q1",
@@ -2084,6 +2211,14 @@
         "\\Gamma=\\frac{75-50}{75+50}=\\frac{25}{125}=0.2",
         "\\mathrm{SWR}=\\frac{1+0.2}{1-0.2}=\\frac{1.2}{0.8}=1.5",
         "Z_{\\mathrm{in}}=\\frac{Z_{0}^{2}}{Z_{L}}=\\frac{50^{2}}{75}=\\frac{2500}{75}=33.33\\,\\Omega"
+      ],
+      "formulaTables": [
+        {
+          "id": "j",
+          "code": "J",
+          "title": "(J) Power",
+          "markdown": "| Condition | $Z_{\\mathrm{in}}$ | Reason |\n|---|---|---|\n| $Z_{l}=Z_{0}$ | $Z_{0}$ | numerator and denominator share the factor |\n| $\\ell=n\\lambda/2$ | $Z_{l}$ | $\\tan\\beta\\ell=0$ |\n| $\\ell=\\lambda/4$ | $Z_{0}^{2}/Z_{l}$ | $\\tan\\beta\\ell\\to\\infty$ |\n| $Z_{l}=0$ (short) | $jZ_{0}\\tan\\beta\\ell$ | purely reactive |\n| $Z_{l}=\\infty$ (open) | $-jZ_{0}\\cot\\beta\\ell$ | purely reactive |\n| $\\ell\\to\\infty$ (lossy) | $Z_{0}$ | $\\tanh\\gamma\\ell\\to 1$ |"
+        }
       ],
       "definitions": [],
       "questionIds": [

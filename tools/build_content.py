@@ -115,6 +115,44 @@ def extract_formulas(block: str) -> list[str]:
     return formulas[:40]
 
 
+def extract_formula_tables(block: str) -> list[dict]:
+    """Pull lettered reference tables (e.g. differential elements) for the formula sheet."""
+    tables = []
+    if not block:
+        return tables
+    # Ensure first lettered heading is detectable
+    text = "\n" + block.strip().replace("\r\n", "\n").replace("\r", "\n")
+    parts = re.split(r"\n(?=\*\*\([A-Z]\)\s+)", text)
+    for part in parts:
+        part = part.strip()
+        if not part.startswith("**("):
+            continue
+        hm = re.match(r"\*\*\(([A-Z])\)\s+(.+?)\*\*", part, re.S)
+        if not hm:
+            continue
+        letter = hm.group(1)
+        title = re.sub(r"\s+", " ", hm.group(2)).strip()
+        # Collect contiguous markdown table rows (include last row without trailing newline)
+        rows: list[str] = []
+        for line in part.splitlines():
+            if re.match(r"^\|.+\|\s*$", line):
+                rows.append(line.rstrip())
+            elif rows:
+                break
+        if len(rows) < 3:
+            continue
+        md = "\n".join(rows)
+        tables.append(
+            {
+                "id": letter.lower(),
+                "code": letter,
+                "title": f"({letter}) {title}",
+                "markdown": md,
+            }
+        )
+    return tables[:20]
+
+
 def extract_definitions(block: str) -> list[dict]:
     defs = []
     # sentences that look like definitions
@@ -276,10 +314,26 @@ def parse_solutions(md: str) -> dict:
                 )
                 topic_qids.append(qid)
 
-            formulas = extract_formulas(preamble) if is_ref or preamble else extract_formulas(preamble)
-            # also pull some from first solutions if ref section
+            formulas = extract_formulas(preamble)
+            formula_tables = extract_formula_tables(preamble)
             if is_ref:
-                formulas = extract_formulas(tbody)[:30]
+                # keep preamble eqs + body eqs (reference blocks often mix both)
+                seen_f = set(formulas)
+                for f in extract_formulas(tbody)[:30]:
+                    if f not in seen_f:
+                        formulas.append(f)
+                        seen_f.add(f)
+                # merge lettered tables from preamble + body (dedupe by code)
+                seen_t = {t.get("code") for t in formula_tables}
+                for tb in extract_formula_tables(tbody):
+                    if tb.get("code") not in seen_t:
+                        formula_tables.append(tb)
+                        seen_t.add(tb.get("code"))
+            else:
+                # topic preambles may also hold essential tables (e.g. dS / dL)
+                if not formula_tables:
+                    formula_tables = extract_formula_tables(tbody)
+            formulas = formulas[:40]
 
             nq = len(topic_qids)
             # frequency score from question years
@@ -341,6 +395,7 @@ def parse_solutions(md: str) -> dict:
                 "isReference": is_ref,
                 "preamble": preamble,
                 "formulas": formulas,
+                "formulaTables": formula_tables,
                 "definitions": extract_definitions(preamble),
                 "questionIds": topic_qids,
                 "priorityBase": round(base, 1),
