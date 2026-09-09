@@ -3281,18 +3281,6 @@ function formulaPdfStyles() {
   `;
 }
 
-function loadHtml2Pdf() {
-  if (window.html2pdf) return Promise.resolve(window.html2pdf);
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js';
-    s.async = true;
-    s.onload = () => resolve(window.html2pdf);
-    s.onerror = () => reject(new Error('Failed to load PDF library'));
-    document.head.appendChild(s);
-  });
-}
-
 function viewFormulas() {
   const chFilter = app.route.params.ch || 'all';
   const blocks = getFormulaChapters(chFilter);
@@ -3322,14 +3310,7 @@ function viewFormulas() {
         <p class="muted" style="margin:0">Chapter-wise · formulas + reference tables · ${totalFormulas} items · ${allBlocks.length} chapters</p>
       </div>
       <div class="row" style="flex-wrap:wrap;gap:8px">
-        <button class="btn btn-primary" data-action="download-formulas-pdf" data-chapter="all">Download full PDF</button>
-        ${
-          filteredOnly
-            ? `<button class="btn btn-secondary" data-action="download-formulas-pdf" data-chapter="${escapeHtml(
-                chFilter
-              )}">PDF this chapter only</button>`
-            : ''
-        }
+        <a class="btn btn-primary" href="./exports/ENEX254-EM-Formula-Sheet.pdf" download="ENEX254-EM-Formula-Sheet.pdf">Download PDF</a>
       </div>
     </div>
 
@@ -3337,9 +3318,9 @@ function viewFormulas() {
 
     ${
       filteredOnly
-        ? `<div class="panel panel-warn"><p class="muted" style="margin:0">TOC below shows <strong>Chapter ${escapeHtml(
+        ? `<div class="panel panel-warn"><p class="muted" style="margin:0">Screen filter shows <strong>Chapter ${escapeHtml(
             String(blocks[0]?.chapter?.number || '')
-          )} only</strong>. Switch to <button class="btn btn-sm btn-secondary" data-nav="#/formulas">All</button> for Chapters 1–6, or use <strong>Download full PDF</strong>.</p></div>`
+          )} only</strong>. The PDF always includes all chapters. Switch to <button class="btn btn-sm btn-secondary" data-nav="#/formulas">All</button> to browse everything on screen.</p></div>`
         : ''
     }
 
@@ -3364,76 +3345,26 @@ function viewFormulas() {
   </div>`;
 }
 
-async function downloadFormulasPdf(chapterId = 'all') {
-  const blocks = getFormulaChapters(chapterId || 'all');
-  if (!blocks.length) {
-    toast('No formulas to export');
-    return;
-  }
-
-  toast('Generating PDF…');
-  const pack = renderFormulaSheetHtml(blocks, { forPrint: true });
-  if (!pack || typeof pack !== 'object' || !pack.html) {
-    toast('Could not build PDF');
-    return;
-  }
-
-  let host = document.getElementById('formula-pdf-host');
-  if (!host) {
-    host = document.createElement('div');
-    host.id = 'formula-pdf-host';
-    host.className = 'formula-pdf-host';
-    host.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(host);
-  }
-
-  host.innerHTML = `<style>${pack.css}</style><div class="formula-pdf-sheet">${pack.html}</div>`;
-  const sheet = host.querySelector('.formula-pdf-sheet');
-
+async function downloadFormulasPdf(_chapterId = 'all') {
+  const url = './exports/ENEX254-EM-Formula-Sheet.pdf';
   try {
-    if (window.MathJax?.typesetClear) {
-      try {
-        MathJax.typesetClear([sheet]);
-      } catch (_) {
-        /* ignore */
-      }
-    }
-    if (window.MathJax?.typesetPromise) {
-      await MathJax.typesetPromise([sheet]);
-    }
-    await new Promise((r) => setTimeout(r, 350));
-
-    const html2pdf = await loadHtml2Pdf();
-    const chLabel =
-      chapterId === 'all' || !blocks[0]?.chapter
-        ? 'all-chapters'
-        : `ch${blocks[0].chapter.number}`;
-    const filename = `ENEX254-EM-Formula-Sheet-${chLabel}.pdf`;
-
-    await html2pdf()
-      .set({
-        margin: [10, 10, 10, 10],
-        filename,
-        image: { type: 'jpeg', quality: 0.96 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          logging: false,
-          backgroundColor: '#ffffff',
-          windowWidth: 794,
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['css', 'legacy'], avoid: ['.eq-row', 'tr', '.formula-table-md table'] },
-      })
-      .from(sheet)
-      .save();
-
+    const res = await fetch(`${url}?t=${Date.now()}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    const obj = URL.createObjectURL(blob);
+    a.href = obj;
+    a.download = 'ENEX254-EM-Formula-Sheet.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(obj);
     toast('PDF downloaded');
   } catch (err) {
     console.error(err);
-    toast('Could not download PDF');
-  } finally {
-    host.innerHTML = '';
+    toast('PDF missing — rebuild with build_formula_pdf.py');
+    // Fallback: open the static path (works if file exists)
+    window.open(url, '_blank');
   }
 }
 

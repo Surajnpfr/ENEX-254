@@ -374,8 +374,10 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   background: var(--soft);
   color: var(--text);
+  text-decoration: none;
   transition: background var(--ease), border-color var(--ease), transform 100ms ease, box-shadow var(--ease);
 }
+a.btn { color: inherit; }
 .btn:hover { filter: none; background: var(--surface-2); }
 .btn:active { transform: scale(.98); }
 .btn-primary {
@@ -383,6 +385,7 @@ a:hover { text-decoration: underline; }
   color: #fff;
   box-shadow: 0 1px 2px rgba(37,99,255,.25);
 }
+a.btn.btn-primary { color: #fff; }
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-secondary {
   background: var(--bg);
